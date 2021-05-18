@@ -18,7 +18,9 @@ android {
     }
 
     testOptions {
-        unitTests.includeAndroidResources true
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 
     buildFeatures {
@@ -57,16 +59,14 @@ dependencies {
     // Testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.test:runner:1.3.0'
-//    testImplementation 'androidx.test.ext:junit:1.1.2'
-//    testImplementation 'androidx.test:core:1.3.0'
+    testImplementation 'org.robolectric:robolectric:4.5.1'
     testImplementation 'androidx.test:core-ktx:1.3.0'
-//    testImplementation 'androidx.test.ext:junit-ktx:1.1.2'
-//
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-//    androidTestImplementation "android.arch.core:core-testing:1.1.1"
-//    androidTestImplementation 'androidx.test:core:1.3.0'
-//
-//    testImplementation 'com.android.support.test:runner:1.0.2'
-//    testImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.3.0"
+    androidTestImplementation "androidx.test:rules:1.3.0"
+
+
 
 }

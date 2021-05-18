@@ -1,0 +1,15 @@
+- Menampilkan Main Activity dan Fragment-nya
+    - Memastikan fragment MOVIES dapat ditampilkan.
+    - Memastikan recycler view fragment MOVIES dapat di-scroll.
+    - Memastikan fragment TV SHOWS dapat ditampilkan.
+    - Memastikan recycler view fragment TV SHOWS dapat di-scroll.
+
+- Menampilkan Detail Activity Dengan Baik
+    - Memastikan salah satu item fragment MOVIES dapat diklik.
+    - Memastikan Detail Activity dapat ditampilkan.
+    - Memastikan data MOVIE benar / cocok.
+    - Memastikan tombol back di toolbar dapat diklik.
+    - Memastikan fragment TV SHOWS dapat ditampilkan.
+    - Memastikan salah satu item fragment TV SHOWS dapat diklik.
+    - Memastikan Detail Activity dapat ditampilkan.
+    - Memastikan data TV SHOWS benar / cocok.
