@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.ahmadfebrianto.moviecatalogue.data.MovieEntity
 import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
 
-class TvShowViewModel: ViewModel() {
+class TvShowViewModel : ViewModel() {
     fun getTvShows(): List<MovieEntity> {
         return CatalogHelper.getTvShows()
     }

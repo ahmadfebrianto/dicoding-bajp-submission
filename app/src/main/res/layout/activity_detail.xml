@@ -36,10 +36,10 @@
 
         <TextView
             android:id="@+id/tv_movie_title"
-            android:autoSizeTextType="uniform"
             style="@style/Theme.MovieCatalogue.BigBold"
             android:layout_width="169dp"
             android:layout_height="25dp"
+            android:autoSizeTextType="uniform"
             android:text="@string/movie_title"
             app:layout_constraintBottom_toTopOf="@+id/tv_rating"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +93,8 @@
 
         <TextView
             android:id="@+id/tv_decription"
-            android:layout_width="151dp"
             style="@style/Theme.MovieCatalogue.BigBold"
+            android:layout_width="151dp"
             android:layout_height="28dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"

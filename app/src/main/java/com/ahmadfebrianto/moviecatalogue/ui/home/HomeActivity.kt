@@ -1,17 +1,14 @@
 package com.ahmadfebrianto.moviecatalogue.ui.home
 
 import android.app.Application
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.ahmadfebrianto.moviecatalogue.databinding.ActivityMainBinding
 import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
-import org.json.JSONArray
-import java.io.IOException
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

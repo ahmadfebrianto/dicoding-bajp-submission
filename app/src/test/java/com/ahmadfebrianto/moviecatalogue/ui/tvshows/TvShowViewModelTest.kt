@@ -2,10 +2,10 @@ package com.ahmadfebrianto.moviecatalogue.ui.tvshows
 
 import androidx.test.core.app.ApplicationProvider
 import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config

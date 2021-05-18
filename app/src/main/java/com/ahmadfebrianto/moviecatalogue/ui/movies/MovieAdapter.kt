@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var listMovies = ArrayList<MovieEntity>()
+    private val listMovies = ArrayList<MovieEntity>()
 
     fun setMovies(movies: List<MovieEntity>) {
         this.listMovies.clear()
@@ -39,7 +39,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     itemView.resources.getString(R.string.release_placeholder, movie.release_year)
 
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailActivity::class.java)
+                    val intent = Intent(it.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_ID, movie.movieId)
                     intent.putExtra(DetailActivity.EXTRA_TYPE, DetailActivity.MOVIE)
                     itemView.context.startActivity(intent)

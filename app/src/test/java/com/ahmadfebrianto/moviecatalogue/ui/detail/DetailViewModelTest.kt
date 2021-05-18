@@ -2,7 +2,8 @@ package com.ahmadfebrianto.moviecatalogue.ui.detail
 
 import androidx.test.core.app.ApplicationProvider
 import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

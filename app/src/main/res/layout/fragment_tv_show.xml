@@ -7,9 +7,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tv_show"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        tools:listitem="@layout/base_row"/>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/base_row" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

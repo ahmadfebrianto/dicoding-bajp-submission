@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.ahmadfebrianto.moviecatalogue.data.MovieEntity
 import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
 
     private lateinit var itemId: String
 

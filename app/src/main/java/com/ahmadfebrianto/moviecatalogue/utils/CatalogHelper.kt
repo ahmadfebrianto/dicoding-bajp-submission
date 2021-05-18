@@ -23,7 +23,7 @@ object CatalogHelper {
         return jsonString
     }
 
-    fun getMovies(): ArrayList<MovieEntity>{
+    fun getMovies(): ArrayList<MovieEntity> {
         val results = ArrayList<MovieEntity>()
         val fileName = "movies.json"
         val jsArray = JSONArray(getJsonDataFromAsset(application, fileName))
