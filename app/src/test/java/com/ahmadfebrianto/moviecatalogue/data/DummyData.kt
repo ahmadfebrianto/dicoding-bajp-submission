@@ -1,5 +1,8 @@
 package com.ahmadfebrianto.moviecatalogue.data
 
+import com.ahmadfebrianto.moviecatalogue.data.source.local.entity.MovieEntity
+import com.ahmadfebrianto.moviecatalogue.data.source.local.entity.TvShowEntity
+
 
 object DummyData {
 
@@ -111,14 +114,12 @@ object DummyData {
         for (i in listOfMovies.indices) {
             val movie = MovieEntity()
             val list = listOfMovies[i]
-            movie.movieId = list["movieId"].toString()
-            movie.poster_path = list["poster_path"].toString()
+            movie.id = list["movieId"].toString()
+            movie.poster = list["poster_path"].toString()
             movie.title = list["title"].toString()
             movie.description = list["description"].toString()
             movie.rating = list["rating"].toString()
-            movie.release_year = list["release_year"].toString()
-            movie.stars = list["stars"].toString()
-            movie.director = list["director"].toString()
+            movie.releaseYear = list["release_year"].toString()
 
             movies.add(movie)
         }
@@ -126,8 +127,19 @@ object DummyData {
         return movies
     }
 
-    fun getTvShows(): List<MovieEntity> {
-        val tvShows = ArrayList<MovieEntity>()
+    fun getMovieById(movieId: String): MovieEntity {
+        var result = MovieEntity()
+        val movies = getMovies()
+        for (item in movies) {
+            if (item.id == movieId) {
+                result = item
+            }
+        }
+        return result
+    }
+
+    fun getTvShows(): List<TvShowEntity> {
+        val tvShows = ArrayList<TvShowEntity>()
 
         val listOfTvShows: List<Map<String, String>> = listOf(
             mapOf(
@@ -242,21 +254,30 @@ object DummyData {
         )
 
         for (i in listOfTvShows.indices) {
-            val tvShow = MovieEntity()
+            val tvShow = TvShowEntity()
             val list = listOfTvShows[i]
-            tvShow.movieId = list["movieId"].toString()
-            tvShow.poster_path = list["poster_path"].toString()
+            tvShow.id = list["movieId"].toString()
+            tvShow.poster = list["poster_path"].toString()
             tvShow.title = list["title"].toString()
             tvShow.description = list["description"].toString()
             tvShow.rating = list["rating"].toString()
-            tvShow.release_year = list["release_year"].toString()
-            tvShow.stars = list["stars"].toString()
-            tvShow.director = list["director"].toString()
+            tvShow.releaseYear = list["release_year"].toString()
 
             tvShows.add(tvShow)
         }
 
         return tvShows
+    }
+
+    fun getTvShowById(tvShowId: String): TvShowEntity {
+        var result = TvShowEntity()
+        val tvShows = getTvShows()
+        for (item in tvShows) {
+            if (item.id == tvShowId) {
+                result = item
+            }
+        }
+        return result
     }
 
 }

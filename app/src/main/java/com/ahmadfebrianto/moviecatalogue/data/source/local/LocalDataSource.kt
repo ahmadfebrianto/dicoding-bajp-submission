@@ -1,58 +1,77 @@
 package com.ahmadfebrianto.moviecatalogue.data.source.local
 
-import android.os.Handler
-import android.os.Looper
-import com.ahmadfebrianto.moviecatalogue.data.MovieEntity
-import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
-import com.ahmadfebrianto.moviecatalogue.utils.EspressoIdlingResource
+import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
+import com.ahmadfebrianto.moviecatalogue.data.source.local.entity.MovieEntity
+import com.ahmadfebrianto.moviecatalogue.data.source.local.entity.TvShowEntity
+import com.ahmadfebrianto.moviecatalogue.data.source.local.room.CatalogDao
 
-class LocalDataSource private constructor(private val catalogHelper: CatalogHelper) {
-
-    private val handler = Handler(Looper.getMainLooper())
+class LocalDataSource private constructor(private val catalogDao: CatalogDao) {
 
     companion object {
+        private var INSTANCE: LocalDataSource? = null
 
-        private const val SERVICE_LATENCY_IN_MILLIS: Long = 1000
-
-        @Volatile
-        private var instance: LocalDataSource? = null
-
-        fun getInstanceHelper(helper: CatalogHelper): LocalDataSource {
-            return instance ?: synchronized(this) {
-                LocalDataSource(helper).apply {
-                    instance = this
-                }
+        fun getInstance(mCatalogDao: CatalogDao): LocalDataSource {
+            return INSTANCE ?: LocalDataSource(mCatalogDao).apply {
+                INSTANCE = this
             }
         }
     }
 
-    fun getMovies(callback: LoadMoviesCallback) {
-        EspressoIdlingResource.increment()
-        handler.postDelayed(
-            {
-                callback.onAllMoviesReceived(catalogHelper.getMovies())
-                EspressoIdlingResource.decrement()
-            },
-            SERVICE_LATENCY_IN_MILLIS
-        )
+    /*MOVIES*/
+
+    fun getAllMovies(): DataSource.Factory<Int, MovieEntity> {
+        return catalogDao.getAllMovies()
     }
 
-    fun getTvShows(callback: LoadTvShowsCallback) {
-        EspressoIdlingResource.increment()
-        handler.postDelayed(
-            {
-                callback.onAllTvShowsReceived(catalogHelper.getTvShows())
-                EspressoIdlingResource.decrement()
-            },
-            SERVICE_LATENCY_IN_MILLIS
-        )
+    fun getFavoriteMovies(): DataSource.Factory<Int, MovieEntity> {
+        return catalogDao.getFavoriteMovies()
     }
 
-    interface LoadMoviesCallback {
-        fun onAllMoviesReceived(listMovies: List<MovieEntity>)
+    fun getMovieById(movieId: String): LiveData<MovieEntity> {
+        return catalogDao.getMovieById(movieId)
     }
 
-    interface LoadTvShowsCallback {
-        fun onAllTvShowsReceived(listTvShows: List<MovieEntity>)
+    fun setFavoriteMovie(movie: MovieEntity, newState: Boolean) {
+        movie.isFavorite = newState
+        catalogDao.updateMovie(movie)
     }
+
+    fun insertMovies(movies: List<MovieEntity>) {
+        catalogDao.insertMovies(movies)
+    }
+
+    fun insertMovie(movie: MovieEntity) {
+        catalogDao.insertMovie(movie)
+    }
+
+
+    /*TV SHOWS*/
+
+    fun getAllTvShows(): DataSource.Factory<Int, TvShowEntity> {
+        return catalogDao.getAllTvShows()
+    }
+
+    fun getFavoriteTvShows(): DataSource.Factory<Int, TvShowEntity> {
+        return catalogDao.getFavoriteTvShows()
+    }
+
+    fun getTvShowById(tvShowId: String): LiveData<TvShowEntity> {
+        return catalogDao.getTvShowById(tvShowId)
+    }
+
+    fun setFavoriteTvShow(tvShow: TvShowEntity, newState: Boolean) {
+        tvShow.isFavorite = newState
+        catalogDao.updateTvShow(tvShow)
+    }
+
+    fun insertTvShows(tvShows: List<TvShowEntity>) {
+        catalogDao.insertTvShows(tvShows)
+    }
+
+    fun insertTvShow(tvShow: TvShowEntity) {
+        catalogDao.insertTvShow(tvShow)
+    }
+
+
 }

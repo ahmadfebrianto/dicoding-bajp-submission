@@ -1,12 +1,12 @@
 package com.ahmadfebrianto.moviecatalogue.ui.home
 
-import com.ahmadfebrianto.moviecatalogue.data.MovieEntity
+import com.ahmadfebrianto.moviecatalogue.data.source.remote.response.CatalogResponse
 
 
 object DummyData {
 
-    fun getMovies(): List<MovieEntity> {
-        val movies = ArrayList<MovieEntity>()
+    fun getMovies(): List<CatalogResponse> {
+        val movies = ArrayList<CatalogResponse>()
         val listOfMovies: List<Map<String, String>> = listOf(
             mapOf(
                 "movieId" to "mv1",
@@ -111,16 +111,14 @@ object DummyData {
         )
 
         for (i in listOfMovies.indices) {
-            val movie = MovieEntity()
+            val movie = CatalogResponse()
             val list = listOfMovies[i]
-            movie.movieId = list["movieId"].toString()
-            movie.poster_path = list["poster_path"].toString()
+            movie.id = list["movieId"].toString()
+            movie.poster = list["poster_path"].toString()
             movie.title = list["title"].toString()
             movie.description = list["description"].toString()
             movie.rating = list["rating"].toString()
-            movie.release_year = list["release_year"].toString()
-            movie.stars = list["stars"].toString()
-            movie.director = list["director"].toString()
+            movie.releaseYear = list["release_year"].toString()
 
             movies.add(movie)
         }
@@ -128,8 +126,8 @@ object DummyData {
         return movies
     }
 
-    fun getTvShows(): List<MovieEntity> {
-        val tvShows = ArrayList<MovieEntity>()
+    fun getTvShows(): List<CatalogResponse> {
+        val tvShows = ArrayList<CatalogResponse>()
 
         val listOfTvShows: List<Map<String, String>> = listOf(
             mapOf(
@@ -244,16 +242,14 @@ object DummyData {
         )
 
         for (i in listOfTvShows.indices) {
-            val tvShow = MovieEntity()
+            val tvShow = CatalogResponse()
             val list = listOfTvShows[i]
-            tvShow.movieId = list["movieId"].toString()
-            tvShow.poster_path = list["poster_path"].toString()
+            tvShow.id = list["movieId"].toString()
+            tvShow.poster = list["poster_path"].toString()
             tvShow.title = list["title"].toString()
             tvShow.description = list["description"].toString()
             tvShow.rating = list["rating"].toString()
-            tvShow.release_year = list["release_year"].toString()
-            tvShow.stars = list["stars"].toString()
-            tvShow.director = list["director"].toString()
+            tvShow.releaseYear = list["release_year"].toString()
 
             tvShows.add(tvShow)
         }

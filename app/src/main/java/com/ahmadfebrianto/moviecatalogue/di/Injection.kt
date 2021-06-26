@@ -1,16 +1,23 @@
 package com.ahmadfebrianto.moviecatalogue.di
 
 import android.content.Context
-import com.ahmadfebrianto.moviecatalogue.data.source.CatalogRepository
+import com.ahmadfebrianto.moviecatalogue.data.CatalogRepository
 import com.ahmadfebrianto.moviecatalogue.data.source.local.LocalDataSource
+import com.ahmadfebrianto.moviecatalogue.data.source.local.room.CatalogDatabase
+import com.ahmadfebrianto.moviecatalogue.data.source.remote.RemoteDataSource
+import com.ahmadfebrianto.moviecatalogue.utils.AppExecutors
 import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
 
 
 object Injection {
-    fun provideContextToRepository(context: Context): CatalogRepository {
+    fun provideRepository(context: Context): CatalogRepository {
 
-        val localDataSource = LocalDataSource.getInstanceHelper(CatalogHelper(context))
+        val database = CatalogDatabase.getInstance(context)
 
-        return CatalogRepository.getInstance(localDataSource)
+        val remoteDataSource = RemoteDataSource.getInstance(CatalogHelper(context))
+        val localDataSource = LocalDataSource.getInstance(database.catalogDao())
+        val appExecutors = AppExecutors()
+
+        return CatalogRepository.getInstance(remoteDataSource, localDataSource, appExecutors)
     }
 }
