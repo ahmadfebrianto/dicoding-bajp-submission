@@ -1,38 +1,24 @@
 package com.ahmadfebrianto.moviecatalogue.ui.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.ahmadfebrianto.moviecatalogue.data.MovieEntity
-import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
+import com.ahmadfebrianto.moviecatalogue.data.source.CatalogRepository
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(private val catalogRepository: CatalogRepository) : ViewModel() {
 
     private lateinit var itemId: String
+    private lateinit var itemType: String
 
-    fun setSelectedItem(itemId: String) {
+    fun setSelectedItem(itemId: String, itemType: String) {
         this.itemId = itemId
+        this.itemType = itemType
     }
 
-    fun getMovie(): MovieEntity {
-        lateinit var movie: MovieEntity
-        val movies = CatalogHelper.getMovies()
-
-        for (item in movies) {
-            if (item.movieId == itemId) {
-                movie = item
-            }
+    fun getItem(): LiveData<MovieEntity> {
+        return when (itemType) {
+            DetailActivity.MOVIE -> catalogRepository.getMovieById(itemId)
+            else -> catalogRepository.getTvShowById(itemId)
         }
-        return movie
-    }
-
-    fun getTvShow(): MovieEntity {
-        lateinit var tvShow: MovieEntity
-        val tvShows = CatalogHelper.getTvShows()
-
-        for (item in tvShows) {
-            if (item.movieId == itemId) {
-                tvShow = item
-            }
-        }
-        return tvShow
     }
 }

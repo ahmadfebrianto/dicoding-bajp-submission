@@ -1,56 +1,53 @@
 package com.ahmadfebrianto.moviecatalogue.ui.home
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.ahmadfebrianto.moviecatalogue.R
 import com.ahmadfebrianto.moviecatalogue.data.MovieEntity
-import com.ahmadfebrianto.moviecatalogue.utils.CatalogHelper
+import com.ahmadfebrianto.moviecatalogue.utils.EspressoIdlingResource
+import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
 class HomeActivityTest {
 
-    private lateinit var movies: ArrayList<MovieEntity>
-    private lateinit var tvShows: ArrayList<MovieEntity>
-
-    @get:Rule
-    var activityRule = ActivityScenarioRule(HomeActivity::class.java)
+    private lateinit var movies: List<MovieEntity>
+    private lateinit var tvShows: List<MovieEntity>
 
     @Before
     fun setUp() {
-        CatalogHelper.application = ApplicationProvider.getApplicationContext()
-        movies = CatalogHelper.getMovies()
-        tvShows = CatalogHelper.getTvShows()
+        ActivityScenario.launch(HomeActivity::class.java)
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+        movies = DummyData.getMovies()
+        tvShows = DummyData.getTvShows()
     }
 
-    /*Memastikan Semua Komponen Main Activity Tampil*/
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
+    }
+
     @Test
     fun showMainActivity() {
 
-        /*Memastikan fragment MOVIES tampil*/
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
 
-        /*Scroll fragment MOVIES*/
         onView(withId(R.id.rv_movie)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                 movies.size
             )
         )
 
-        /*Klik fragment TV SHOWS*/
         onView(withText("TV SHOWS")).perform(click())
 
-        /*Memastikan fragment TV SHOWS tampil*/
         onView(withId(R.id.rv_tv_show)).check(matches(isDisplayed()))
 
-        /*Scroll fragment TV SHOWS*/
         onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                 tvShows.size
@@ -58,11 +55,9 @@ class HomeActivityTest {
         )
     }
 
-    /*Memastikan Detail Activity Dapat Diakses*/
     @Test
     fun showDetailActivity() {
 
-        /*Klik item paling atas dari MOVIES*/
         onView(withId(R.id.rv_movie)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
@@ -70,16 +65,12 @@ class HomeActivityTest {
             )
         )
 
-        /*Cek Tampilan Data Movie*/
         checkDetailActivity(movies[0])
 
-        /*Klik Toolbar Back Button*/
         onView(withContentDescription("Navigate up")).perform(click())
 
-        /*Klik Fragment TV SHOWS*/
         onView(withText("TV SHOWS")).perform(click())
 
-        /*Klik item paling atas dari TV SHOWS*/
         onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
@@ -87,7 +78,6 @@ class HomeActivityTest {
             )
         )
 
-        /*Cek Tampilan Data Tv Show*/
         checkDetailActivity(tvShows[0])
     }
 

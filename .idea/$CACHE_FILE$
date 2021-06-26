@@ -5,22 +5,12 @@
       <profile-state>
         <expanded-state>
           <State />
+        </expanded-state>
+        <selected-state>
           <State>
             <id>Android</id>
           </State>
-          <State>
-            <id>CorrectnessLintAndroid</id>
-          </State>
-          <State>
-            <id>LintAndroid</id>
-          </State>
-          <State>
-            <id>MessagesCorrectnessLintAndroid</id>
-          </State>
-          <State>
-            <id>Proofreading</id>
-          </State>
-        </expanded-state>
+        </selected-state>
       </profile-state>
     </entry>
   </component>

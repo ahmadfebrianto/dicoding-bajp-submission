@@ -1,6 +1,7 @@
 package com.ahmadfebrianto.moviecatalogue.ui.tvshows
 
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
         fun bind(tv_show: MovieEntity) {
             with(binding) {
                 Glide.with(itemView.context)
-                    .load(tv_show.poster_path)
+                    .load(Uri.parse(tv_show.poster_path))
                     .apply(
                         RequestOptions.placeholderOf(R.drawable.ic_loading)
                             .error(R.drawable.ic_error)

@@ -1,10 +1,8 @@
 package com.ahmadfebrianto.moviecatalogue.data
 
-import android.net.Uri
-
 data class MovieEntity(
     var movieId: String = "",
-    var poster_path: Uri? = null,
+    var poster_path: String = "",
     var title: String = "",
     var description: String = "",
     var rating: String = "",

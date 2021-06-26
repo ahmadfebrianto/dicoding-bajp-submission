@@ -1,6 +1,7 @@
 package com.ahmadfebrianto.moviecatalogue.ui.movies
 
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         fun bind(movie: MovieEntity) {
             with(binding) {
                 Glide.with(itemView.context)
-                    .load(movie.poster_path)
+                    .load(Uri.parse(movie.poster_path))
                     .apply(
                         RequestOptions.placeholderOf(R.drawable.ic_loading)
                             .error(R.drawable.ic_error)

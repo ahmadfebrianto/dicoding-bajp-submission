@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ahmadfebrianto.moviecatalogue.R
+import com.ahmadfebrianto.moviecatalogue.utils.ViewModelFactory
 
 class TvShowFragment : Fragment() {
     override fun onCreateView(
@@ -24,23 +26,24 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val rvTvShow: RecyclerView = view.findViewById(R.id.rv_tv_show)
-        if (activity != null) {
-            val viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[TvShowViewModel::class.java]
+        val progressBar: ProgressBar = view.findViewById(R.id.progress_bar)
 
-            val tvShows = viewModel.getTvShows()
-            val tvShowAdapter = TvShowAdapter()
-            tvShowAdapter.setMovies(tvShows)
+        val factory = ViewModelFactory.getInstance(requireActivity())
+        val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
-            rvTvShow.layoutManager = LinearLayoutManager(context)
-            rvTvShow.adapter = tvShowAdapter
-            rvTvShow.setHasFixedSize(true)
+        val tvShowAdapter = TvShowAdapter()
+        viewModel.getTvShows().observe(viewLifecycleOwner, {
+            progressBar.visibility = View.GONE
+            tvShowAdapter.setMovies(it)
+            tvShowAdapter.notifyDataSetChanged()
+        })
 
-            val dividerItemDecoration =
-                DividerItemDecoration(rvTvShow.context, DividerItemDecoration.VERTICAL)
-            rvTvShow.addItemDecoration(dividerItemDecoration)
-        }
+        rvTvShow.layoutManager = LinearLayoutManager(context)
+        rvTvShow.adapter = tvShowAdapter
+        rvTvShow.setHasFixedSize(true)
+
+        val dividerItemDecoration =
+            DividerItemDecoration(rvTvShow.context, DividerItemDecoration.VERTICAL)
+        rvTvShow.addItemDecoration(dividerItemDecoration)
     }
 }

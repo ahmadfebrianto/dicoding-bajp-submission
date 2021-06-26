@@ -1,0 +1,57 @@
+- MovieViewModelTest
+    - Memuat data MOVIES
+        - Memanipulasi data ketika pemanggilan data movies di kelas repository.
+        - Memastikan metode di kelas repository terpanggil.
+        - Memastikan data movies tidak kosong.
+        - Memastikan jumlah data movies 10 atau lebih.
+        - Memastikan observer berhasil mengambil data movies saat terjadi perubahan.
+
+- TvShowViewModelTest
+    - Memuat data TV SHOWS
+        - Memanipulasi data ketika pemanggilan data tv shows di kelas repository.
+        - Memastikan metode di kelas repository terpanggil.
+        - Memastikan data tvShows tidak kosong.
+        - Memastikan jumlah data tvShows 10 atau lebih.
+        - Memastikan observer berhasil mengambil data tv shows saat terjadi perubahan.
+
+- DetailViewModelTest
+    - Memuat item movie
+        - Memanipulasi data ketika pemanggilan data movie di kelas repository.
+        - Memastikan metode di kelas repository terpanggil.
+        - Memastikan data item movie tidak kosong.
+        - Memastikan nilai dari atribut movie cocok.
+        - Memastikan observer berhasil mengambil data movies saat terjadi perubahan.
+
+    - Memuat item tv show
+        - Memanipulasi data ketika pemanggilan data movie di kelas repository.
+        - Memastikan metode di kelas repository terpanggil.
+        - Memastikan data item tv show tidak kosong.
+        - Memastikan nilai dari atribut tv show cocok.
+        - Memastikan observer berhasil mengambil data tv shows saat terjadi perubahan.
+
+- CatalogRepositoryTest
+    - Memuat semua data movies.
+        - Memastikan fungsi callback berhasil dipanggil.
+        - Memastikan fungsi untuk mengambil data movies dari repository berjalan.
+        - Memastikan data movies tidak null.
+        - Memastikan jumlah data movies cocok dengan data dummy.
+
+    - Memuat semua data tv shows.
+        - Memastikan fungsi callback berhasil dipanggil.
+        - Memastikan fungsi untuk mengambil data tv shows dari repository berjalan.
+        - Memastikan data tv shows tidak null.
+        - Memastikan jumlah data tv shows cocok dengan data dummy.
+
+    - Memuat data movie berdasarkan ID.
+        - Memastikan fungsi callback berhasil dipanggil.
+        - Memastikan fungsi untuk mengambil data movies berdasarkan ID dari repository berjalan.
+        - Memastikan data movie tidak null.
+        - Memastikan salah satu atribut (title) dari data movie tidak null.
+        - Memastikan jumlah data movies cocok dengan data dummy.
+
+    - Memuat data tv show berdasarkan ID.
+        - Memastikan fungsi callback berhasil dipanggil.
+        - Memastikan fungsi untuk mengambil data tv show berdasarkan ID dari repository berjalan.
+        - Memastikan data tv show tidak null.
+        - Memastikan salah satu atribut (title) dari data tv show tidak null.
+        - Memastikan jumlah data tv shows cocok dengan data dummy.
